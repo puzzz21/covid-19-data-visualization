@@ -27,7 +27,6 @@ for location in dataGroupedByLocation:
     # Total Cases
     totalCases = list(dict(fullData[fullData.location.str.contains(location)]["total_cases"]).values())
     dates = list(dict(fullData[fullData.location.str.contains(location)]["date"]).values())
-    totalCasesByDate = dict(zip(dates, totalCases))
     xAxisData = dates[0:len(dates):int(len(dates) / 20)]
 
     fig, ax = plt.subplots()
