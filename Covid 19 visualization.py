@@ -21,11 +21,13 @@ fullData = pd.read_csv("https://covid.ourworldindata.org/data/ecdc/full_data.csv
 fullData.head()
 
 def plotCountries(location):
+    locationIndex = fullData.location.str.contains(location)
+
     #Total Cases
-    totalCases = list(dict(fullData[fullData.location.str.contains(location)]["total_cases"]).values())
-    dates = list(dict(fullData[fullData.location.str.contains(location)]["date"]).values())   
-         
+    totalCases = list(dict(fullData[locationIndex]["total_cases"]).values())
+    dates = list(dict(fullData[locationIndex]["date"]).values())   
     xAxisData = dates[0:len(dates): int(len(dates)/ 7) if dates else 30 ]
+
     fig, ax = plt.subplots()
     ax.plot(totalCases)
     plt.suptitle(location)
@@ -35,8 +37,8 @@ def plotCountries(location):
     ax.set_xticklabels(xAxisData, rotation = 45)
 
     #New Cases and Death Count
-    newCases = list(dict(fullData[fullData.location.str.contains(location)]["new_cases"]).values())
-    newDeaths = list(dict(fullData[fullData.location.str.contains(location)]["new_deaths"]).values())
+    newCases = list(dict(fullData[locationIndex]["new_cases"]).values())
+    newDeaths = list(dict(fullData[locationIndex]["new_deaths"]).values())
 
     fig, ax = plt.subplots() 
     ax.plot(newCases, label = "new cases")
