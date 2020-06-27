@@ -44,6 +44,7 @@ for location in dataGroupedByLocation:
     fig, ax = plt.subplots()
     ax.plot(newCases, label="new cases")
     ax.plot(newDeaths, label="deaths")
+    plt.legend()
     plt.suptitle(location)
     ax.set_title("New cases and deaths")
     plt.xlabel("dates")
